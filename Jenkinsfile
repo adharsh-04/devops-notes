@@ -1,11 +1,18 @@
 pipeline {
     agent any
 
+    tools {
+        jdk 'JDK-21'
+        maven 'Maven-3.9.16'
+    }
+
     stages {
 
-        stage('Checkout') {
+        stage('Verify Tools') {
             steps {
-                echo 'Code checked out from GitHub'
+                bat 'java -version'
+                bat 'mvn -version'
+                bat 'git --version'
             }
         }
 
@@ -20,5 +27,6 @@ pipeline {
                 bat 'dir target'
             }
         }
+
     }
 }
